@@ -1,7 +1,7 @@
 let fs=require("fs");
 let path=require("path");
 let fileName="data3.txt";
-let filePath=path.join(__dirname,"data",fileName);
+let filePath=path.join(__dirname,"..","data",fileName);
 fs.writeFile(
     filePath,
     "Yo sup",
