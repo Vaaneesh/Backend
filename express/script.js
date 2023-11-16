@@ -1,7 +1,11 @@
 const express=require("express");
 const app=express();
-app.get("/",(req,res)=>{
-    res.send("Yo sup!!");
+const path=require("path");
+// app.get("/",(req,res)=>{
+//     res.send("Yo sup!!");
+// })
+app.get('/',function(req,res){
+    res.sendFile(path.join(__dirname,"index.html"));
 })
 app.get("/about",(req,res)=>{
     res.send("<h1>About me </h1>")
