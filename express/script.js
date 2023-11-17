@@ -17,8 +17,8 @@ app.get('/',function(req,res){
 //     res.send(`${username},${age}`);
 // })
 app.get("/users",(req,res)=>{
-    const username=req.query.username;
-    const password=req.query.password;
+    let{username,password}=req.query;
+    // const password=req.query.password;
     res.send(`username is ${username} & age is ${password}`);
 })
 
