@@ -1,10 +1,11 @@
 const express=require("express");
 const app=express();
+let path=require("path");
 app.use(express.urlencoded({extended:true}));
-
 let todo=require("./todos/JS/script");
+app.use(express.static(path.join(__dirname,"static")))
 // let todos=[];
-
+app.use
 app.get("/gettodo",async(req,res)=>{
     // res.send(todos);
     let data=await todo.gettodo();
@@ -17,6 +18,6 @@ app.post("/addtodo",async(req,res)=>{
     res.send(msg);
 })
 
-app.listen(6666,()=>{
+app.listen(3000,()=>{
     console.log("server started!");
 });
