@@ -1,4 +1,27 @@
 let tasklist=document.querySelector(".tasklist");
+let form=document.querySelector(".myform");
+let input=document.querySelector("#taskitem");
+
+form.addEventListener("submit",(ev)=>{
+    ev.preventDefault();
+    let taskitem=input.value;
+    axios.post("/addtodo",{
+        task:taskitem  //key pass kri
+    }).then((data)=>{
+        console.log(data);
+        input.value="";
+        let div=document.createElement("div");
+        div.innerText=`${taskitem}`;
+        tasklist.append(div);
+    })
+    // axios.post("/addtodo",{
+    //     task:taskitem
+    // },{
+    //     headers:{
+
+    //     }
+    // })
+})
 
 function showData(data){
     console.log(data);
