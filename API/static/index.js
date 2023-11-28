@@ -11,7 +11,7 @@ form.addEventListener("submit",(ev)=>{
         console.log(data);
         input.value="";
         let div=document.createElement("div");
-        div.innerText=`${taskitem}`;
+        div.innerHTML=`${taskitem} <button>Delete</button>`;
         tasklist.append(div);
     })
     // axios.post("/addtodo",{
