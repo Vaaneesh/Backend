@@ -7,8 +7,10 @@
 </head>
 <body>
     {{> navbar}}
-    <h1>About</h1>
-    <p>{{name}}</p>
-    <p>{{id}}</p>
+    <ul>
+    {{#each todos as  |todo|}}
+        <li>{{todo.name}}</li>
+    {{/each}}
+    </ul>
 </body>
 </html>
