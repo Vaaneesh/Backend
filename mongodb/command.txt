@@ -1,5 +1,10 @@
 show dbs --> to view all database
 
-Insert a document-----
+Insert a document----->
 1. db.<collectionName>.insertOne({<object>});
-2. 
+2. db.<collectionName>.insertMany([{<Array of object>},{}......])
+
+Find a document------>
+1. find() //is a cursor which we can use to iterate
+2. db.myCollections1.find({_id:ObjectId("6576f9436b1b704f57d9fb03")})
+3. db.myCollections1.find({"name":"iphone"})
