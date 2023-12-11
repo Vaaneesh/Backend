@@ -1,0 +1,5 @@
+show dbs --> to view all database
+
+Insert a document-----
+1. db.<collectionName>.insertOne({<object>});
+2. 
