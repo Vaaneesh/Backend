@@ -1,8 +1,14 @@
 const Post=require("../model/post");
 
 module.exports.getAllPost=async(req,res)=>{
-    let allPost=await Post.find({});
-    res.json(allPost);
+    try{
+
+        let allPost=await Post.find({});
+        res.send(allPost);
+    }
+    catch(error){
+        res.send(error);
+    }
 }
 module.exports.postAddPost=async(req,res)=>{
     const {postName,imageURL,caption}=req.body;
