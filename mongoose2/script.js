@@ -15,7 +15,7 @@ app.use("/posts",require("./routes/post"))
 
 mongoose.connect("mongodb://127.0.0.1:27017/g26").then(()=>{
     app.listen(3334,()=>{
-        console.log("Server started at port 3333");
+        console.log("Server started at port 3334");
     })
 })
 
