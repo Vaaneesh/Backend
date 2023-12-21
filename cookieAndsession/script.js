@@ -3,12 +3,21 @@ const app=express();
 const path=require("path")
 const mongoose=require("mongoose");
 const user=require("./model/user");
+// const session=require('express-session');
+
 app.use(express.static(path.join(__dirname,"static")))
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.set('view engine', 'hbs');
+// app.use(session{
 
+// })
 
+// function checkIsLoggedIn(req,res,next){
+//     if(req.session.isLoggedin){
+
+//     }
+// }
 app.get("/",(req,res)=>{
     res.render("home");
 })
@@ -26,11 +35,12 @@ app.post("/register",async(req,res)=>{
 })
 app.post("/login",async(req,res)=>{
     const {username,password}=req.body;
-    let user=await user.findOne({username:username})
-    if(user){
-        if(user.password!=password){
+    let Founduser=await user.findOne({username:username})
+    if(Founduser){
+        if(Founduser.password!=password){
             res.send("Invalid password");
         }else{
+            // req.session.isLoggedin=true;
             res.redirect("/");
         }
     }else{
