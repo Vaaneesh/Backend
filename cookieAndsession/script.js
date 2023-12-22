@@ -3,23 +3,27 @@ const app=express();
 const path=require("path")
 const mongoose=require("mongoose");
 const user=require("./model/user");
-// const session=require('express-session');
+const blog=require("./model/blog");
+const session=require('express-session');
 
 app.use(express.static(path.join(__dirname,"static")))
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.set('view engine', 'hbs');
-// app.use(session{
+app.use(session({
+    secret: 'keyboard cat',
+}))
 
-// })
-
-// function checkIsLoggedIn(req,res,next){
-//     if(req.session.isLoggedin){
-
-//     }
-// }
-app.get("/",(req,res)=>{
-    res.render("home");
+function checkIsLoggedIn(req,res,next){
+   if(req.session.isLoggedin){
+            next();
+    }
+        else{
+            res.redirect("/login");
+        }
+}
+app.get("/",checkIsLoggedIn,(req,res)=>{
+    res.render("home",{user:req.session.user});
 })
 app.get("/login",(req,res)=>{
     res.render("login");
@@ -40,12 +44,22 @@ app.post("/login",async(req,res)=>{
         if(Founduser.password!=password){
             res.send("Invalid password");
         }else{
-            // req.session.isLoggedin=true;
+            req.session.isLoggedin=true;
+            req.session.user=Founduser;
             res.redirect("/");
         }
     }else{
         res.send("user not found!!!");
     }
+})
+app.post("/addblog",async(req,res)=>{
+    const {title,content}=req.body;
+    let newBlog=new blog({title,content,user:req.session.user._id});
+    await newBlog.save();
+    let userrr=await user.findOne({_id:req.session.user._id});
+    userrr.blog.push(newBlog._id);
+    await userrr.save();
+    res.send("Done");
 })
 
 mongoose.connect("mongodb://127.0.0.1:27017/g26Session").then(()=>{
