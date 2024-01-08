@@ -13,11 +13,12 @@
             <li><a href="/blogs">All blogs</a></li>
         </ul>
     </nav>
-    <h1>Welcome {{user.username}}</h1>
-    <form action="/addblog" method="post">
-        <input type="text" name="title" placeholder="Enter title">
-        <input type="text" name="content" placeholder="Enter content">
-        <button type="submit">Add Blog</button>
-    </form>
+    {{#each blogs as  |blog|}}
+    <div>
+        <div>{{user.username}}</div>
+        <div>{{blog.title}}</div>
+        <div>{{blog.content}}</div>
+    </div>
+    {{/each}}
 </body>
 </html>

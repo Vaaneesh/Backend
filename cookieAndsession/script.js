@@ -61,7 +61,12 @@ app.post("/addblog",async(req,res)=>{
     await userrr.save();
     res.send("Done");
 })
+app.get("/myblog",async(req,res)=>{
+    let User1=await user.findById(req.session.user._id).populate("blog");
+    console.log(User1);
+    res.render("myblog",{blogs:User1.blog});
 
+})
 mongoose.connect("mongodb://127.0.0.1:27017/g26Session").then(()=>{
     app.listen(4444,()=>{
         console.log("Server started at port 4444");
