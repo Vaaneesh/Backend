@@ -13,9 +13,9 @@
             <li><a href="/blogs">All blogs</a></li>
         </ul>
     </nav>
+        <div>{{user.username}}</div>
     {{#each blogs as  |blog|}}
     <div>
-        <div>{{user.username}}</div>
         <div>{{blog.title}}</div>
         <div>{{blog.content}}</div>
     </div>

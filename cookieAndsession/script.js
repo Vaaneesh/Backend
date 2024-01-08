@@ -64,7 +64,7 @@ app.post("/addblog",async(req,res)=>{
 app.get("/myblog",async(req,res)=>{
     let User1=await user.findById(req.session.user._id).populate("blog");
     console.log(User1);
-    res.render("myblog",{blogs:User1.blog});
+    res.render("myblog",{blogs:User1.blog,user:User1});
 
 })
 mongoose.connect("mongodb://127.0.0.1:27017/g26Session").then(()=>{
