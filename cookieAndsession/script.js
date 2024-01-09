@@ -5,6 +5,8 @@ const mongoose=require("mongoose");
 const user=require("./model/user");
 const blog=require("./model/blog");
 const session=require('express-session');
+app.use(express.static('public'));
+
 
 app.use(express.static(path.join(__dirname,"static")))
 app.use(express.urlencoded({extended:true}));
@@ -71,6 +73,46 @@ app.get("/blogs",async(req,res)=>{
     const blogs=await blog.find().populate("user");
     console.log(blogs);
     res.render("allblogs",{blogs});
+})
+app.get("/confirm-delete",checkIsLoggedIn,async(req,res)=>{
+    res.render("Delete");
+})
+app.post("/delete-account",checkIsLoggedIn,async(req,res)=>{
+    const Id=req.session.user._id;
+    await user.findByIdAndDelete(Id);
+    req.session.destroy((err)=>{
+        if(err)
+        console.log(err);
+        res.send("Done");
+
+    })
+})
+app.get("/logout",(req,res)=>{
+    req.session.destroy((err)=>{
+        if(err)
+        console.log(err);
+    res.redirect("/");
+    })
+})
+app.get("/delete-blog/:blogId",checkIsLoggedIn,async(req,res)=>{
+    const BId=req.params.blogId;
+    try{
+        const foundBlog=await blog.findById(BId);
+        if(foundBlog.user.equals(req.session.user._id)){
+            await blog.findByIdAndDelete(BId);
+            await user.findByIdAndUpdate(req.session.user._id,{
+                $pull:{blog:BId}
+            });
+            res.redirect("/myblog");
+        }
+        else{
+            res.send("Permission Denied");
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.redirect("/myblog");
+    }
 })
 mongoose.connect("mongodb://127.0.0.1:27017/g26Session").then(()=>{
     app.listen(4444,()=>{

@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="/">home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/myblog">Myblog</a></li>
             <li><a href="/blogs">All blogs</a></li>
+            <li><a href="/confirm-delete">Delete my account</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
         <div>{{user.username}}</div>
@@ -18,6 +22,7 @@
     <div>
         <div>{{blog.title}}</div>
         <div>{{blog.content}}</div>
+        <a href="/delete-blog/{{_id}}">Delete Blog</a>
     </div>
     {{/each}}
 </body>
