@@ -21,6 +21,7 @@
     {{#each blogs as  |blog|}}
     <div>
         <div>{{blog.title}}</div>
+        <img src="{{imageUrl}}" alt="Blog Image">
         <div>{{blog.content}}</div>
         <a href="/delete-blog/{{_id}}">Delete Blog</a>
     </div>

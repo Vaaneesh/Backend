@@ -7,6 +7,7 @@ const blogSchema=new mongoose.Schema({
     user:{
         type:  Schema.Types.ObjectId,
         ref:"User"
-    }
+    },
+    isApproved:{type:Boolean,default:false}
 })
 module.exports=mongoose.model("blog",blogSchema);
