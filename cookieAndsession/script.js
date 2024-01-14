@@ -181,7 +181,6 @@ app.post("/addblog",checkIsLoggedIn,upload.single('image'),async(req,res)=>{
         isApproved:req.session.user.isAdmin,
         userEmail:authorEmail,
         imageUrl: req.file ? `/uploads/${req.file.filename}` : null,
-        // imageUrl:req.file ? `/uploads/${req.file.filename}`:null,
     });
     await newBlog.save();
     let userrr=await user.findOne({_id:req.session.user._id});
@@ -199,7 +198,7 @@ app.get("/myblog",checkIsLoggedIn,async(req,res)=>{
         let User1=await user.findById(req.session.user._id).populate("blog");
         const approvedblogs=User1.blog.filter(blog=>blog.isApproved === true);
         console.log(User1);
-        res.render("myblog",{blogs:approvedblogs,user:User1});
+        res.render("myblog",{blogs:approvedblogs,user:req.session.user});
     }
     else{
         res.redirect('/login');
