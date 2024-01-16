@@ -4,27 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/style.css">
-
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blogs.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/myblog">Myblog</a></li>
-            <li><a href="/blogs">All blogs</a></li>
-            <li><a href="/confirm-delete">Delete my account</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </nav>
-        <div>{{user.username}}</div>
+    {{> navbar}}
+    <header>
+        <h1>My Blogs</h1>
+    </header>
+    <main>
+    <div class="username"><p>Author: {{user.username}}</p></div>
     {{#each blogs as  |blog|}}
-    <div>
-        <div>{{blog.title}}</div>
-        <img src="{{imageUrl}}" alt="Blog Image">
-        <div>{{blog.content}}</div>
-        <a href="/delete-blog/{{_id}}">Delete Blog</a>
+    <div class="blog-container">
+        <div class="blog-title">{{blog.title}}</div>
+        {{#if imageUrl}}
+        <img class="blog-image" src="{{imageUrl}}" alt="Blog Image">
+        {{/if}}
+        <div class="blog-content">{{blog.content}}</div>
+        <div class="blog-actions">
+            <a href="/edit-blog/{{_id}}">Edit blog</a>
+            <a href="/delete-blog/{{_id}}">Delete Blog</a>
+        </div>
     </div>
     {{/each}}
+    </main>
+
 </body>
 </html>

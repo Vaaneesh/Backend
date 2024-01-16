@@ -7,19 +7,13 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/myblog">Myblog</a></li>
-            <li><a href="/blogs">All blogs</a></li>
-            <li><a href="/confirm-delete">Delete my account</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </nav>
+    {{> navbar}}
+    
     <h1>Welcome {{user.username}}</h1>
-    <form action="/addblog" method="post">
+    <form action="/addblog" method="post" enctype="multipart/form-data">
         <input type="text" name="title" placeholder="Enter title">
-        <input type="text" name="imageUrl" placeholder="Image Url" required>
+        <label for="image">Image</label>
+        <input type="file" id="image" name="image">
         <input type="text" name="content" placeholder="Enter content">
         <button type="submit">Add Blog</button>
     </form>

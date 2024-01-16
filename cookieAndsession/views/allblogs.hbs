@@ -5,26 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All blogs</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="blogs.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/myblog">Myblog</a></li>
-            <li><a href="/blogs">All blogs</a></li>
-            <li><a href="/confirm-delete"">Delete my account</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </nav>
-    <h1>All Blogs</h1>
+    {{> navbar}}
+    <header>
+        <h1>All Blogs</h1>
+    </header>
+    <main>
     {{#each blogs as |blog|}}
-        <div>
-            <p>{{blog.user.username}}</p>
+    <div class="blog-container">
+        <div class="username">
+            <p>Author: {{blog.user.username}}</p>
+        </div>
+        <div class="blog-title">
             <h1>{{blog.title}}</h1>
-            <img src="{{imageUrl}}" alt="Blog Image">
+        </div>
+            <img class="blog-image" src="{{imageUrl}}" alt="Blog Image">
+        <div class="blod-content">
             <p>{{blog.content}}</p>
         </div>
+    </div>  
     {{/each}}
+    </main>
     
 </body>
 </html>

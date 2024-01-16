@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    {{#each pendingBlogs as |blog|}}
+        <div>
+            <h2>{{blog.title}}</h2>
+            <p>{{blog.content}}</p>
+            {{#if imageUrl}}
+                <img src="{{imageUrl}}" alt="Blog Image">
+            {{/if}}
+            <p>Submitted by: {{blog.user.username}}</p>
+            <form method="post" action="/admin/approve-blog/{{_id}}">
+                <button type="submit">Approve</button>
+            </form>
+            <form method="post" action="/admin/deny-blog/{{_id}}">
+                <button type="submit">Reject</button>
+            </form>
+        </div>
+        {{/each}}
+</body>
+</html>
