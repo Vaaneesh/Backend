@@ -9,7 +9,7 @@ nav{
 nav li{
     display: inline-block;
     justify-content: space-between;
-    padding: 0 100px;
+    padding: 0 80px;
 }
 nav a{
     color: white;

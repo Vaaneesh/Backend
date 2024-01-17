@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/admin.css">
 </head>
 <body>
     <h1>Admin Dashboard</h1>
     {{#each pendingBlogs as |blog|}}
-        <div>
+        <div class="main">
             <h2>{{blog.title}}</h2>
             <p>{{blog.content}}</p>
             {{#if imageUrl}}
                 <img src="{{imageUrl}}" alt="Blog Image">
             {{/if}}
             <p>Submitted by: {{blog.user.username}}</p>
+            <div class="button-container">
+
             <form method="post" action="/admin/approve-blog/{{_id}}">
-                <button type="submit">Approve</button>
+                <button class="approve" type="submit">Approve</button>
             </form>
             <form method="post" action="/admin/deny-blog/{{_id}}">
-                <button type="submit">Reject</button>
+                <button class="reject" type="submit">Reject</button>
             </form>
+            </div>
         </div>
         {{/each}}
 </body>

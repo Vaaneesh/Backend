@@ -4,18 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/home.css">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     {{> navbar}}
-    
-    <h1>Welcome {{user.username}}</h1>
-    <form action="/addblog" method="post" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="Enter title">
-        <label for="image">Image</label>
-        <input type="file" id="image" name="image">
-        <input type="text" name="content" placeholder="Enter content">
-        <button type="submit">Add Blog</button>
-    </form>
+    <h1> Welcome <span>{{user.username}}</span></h1>
+    <div class="container">
+        <div class="details">
+        <form action="/addblog" method="post" enctype="multipart/form-data">
+            <div class="input-box">
+                <label for="Title">Title</label>   
+                <input type="text" name="title" required>
+            </div>
+            <div class="input-box">
+                <label for="image">Image</label>
+                <input type="file" id="image" name="image">
+            </div>
+            <div class="input-box">
+                <label for="Content">Content</label>
+                <input type="text" name="content">
+            </div>
+            <button type="submit">Add Blog</button>
+        </form>
+        </div>
+    </div>
 </body>
 </html>
