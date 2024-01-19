@@ -115,7 +115,7 @@ app.post("/register",async(req,res)=>{
     }
 })
 app.get('/verify/:userEmail',async(req,res)=>{
-    const {userEmail}=req.params;
+    const {userEmail}=req.params.userEmail;
     try{
         const foundUser=await user.findOne({email:userEmail});
         if(foundUser){
@@ -331,7 +331,7 @@ app.get('/edit-blog/:blogId',checkIsLoggedIn,async(req,res)=>{
         console.log(err);
     }
 })
-app.post('/edit-blog/:blogId',checkIsLoggedIn,async(req,res)=>{
+app.post('/edit-blog/:blogId',checkIsLoggedIn,upload.single('image'),async(req,res)=>{
     const blogId=req.params.blogId;
     const{title,content}=req.body;
     try{
@@ -340,13 +340,13 @@ app.post('/edit-blog/:blogId',checkIsLoggedIn,async(req,res)=>{
             foundBlog.title=title;
             foundBlog.content=content;
             foundBlog.isApproved=false;
+            if(req.file){
+                foundBlog.imageUrl=`/uploads/${req.file.filename}`;
+            }
             if(req.session.user.isAdmin){
                 foundBlog.isApproved=true;
             }
             await foundBlog.save();
-            const adminEmail='prabhakarvaaneesh@gmail.com';
-            const editApprovalLink=`http://localhost:4444/admin/dashboard`;
-            // await sendApprovalRequestEmail(adminEmail,foundBlog.title,editApprovalLink);
             if(req.session.user.isAdmin){
                 res.send("Admin Blog Edited Successfully")
             }
